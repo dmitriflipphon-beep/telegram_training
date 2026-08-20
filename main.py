@@ -21,6 +21,7 @@ bot.remove_webhook()
 bot.set_webhook(url=WEBHOOK_URL)
 logger.info(f"Webhook set to {WEBHOOK_URL}")
 
+# ------------------- ОСНОВНОЙ ОБРАБОТЧИК -------------------
 @app.route('/' + SECRET, methods=['POST'])
 def webhook():
     if request.headers.get('content-type') == 'application/json':
@@ -31,7 +32,12 @@ def webhook():
     else:
         return "Unsupported Media Type", 415
 
-# ---------- ОБРАБОТЧИК КОМАНДЫ /start ----------
+# Простой обработчик для проверки (чтобы браузер не ругался)
+@app.route('/')
+def hello():
+    return "Бот работает!"
+
+# ---------- ОБРАБОТЧИКИ КОМАНД БОТА ----------
 @bot.message_handler(commands=['start'])
 def simple_start(message):
     bot.send_message(
