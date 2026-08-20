@@ -3,7 +3,7 @@ import logging
 from flask import Flask, request
 import telebot
 
-# НАСТРОЙКИ (используй новый токен!)
+# НАСТРОЙКИ
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8626271259:AAFEHyqGDcP3c0OtK3eCW_KV0KYRR7uxDW0")
 SECRET = "qwerty123"
 WEBHOOK_URL = f"https://striking-prosperity.up.railway.app/{SECRET}"
@@ -24,7 +24,7 @@ try:
 except Exception as e:
     logger.error(f"❌ Webhook error: {e}")
 
-# ------------------- ОБРАБОТЧИК ВЕБХУКА (ГЛАВНЫЙ!) -------------------
+# ------------------- ОБРАБОТЧИК ВЕБХУКА -------------------
 @app.route('/' + SECRET, methods=['POST'])
 def webhook():
     try:
